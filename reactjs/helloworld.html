@@ -13,11 +13,14 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">//script标签的type属性设置为text/babel，则可以在其中使用JSX
-	
+      var theStyle = {
+      	fontSize = 30,
+	color: 'green'
+      };
       ReactDOM.render(
         <div>
-        <h1>Hello, react!</h1>
-	<label>@tiandiduwu</label>
+        <h1 style={{color:'red'}}>Hello, react!</h1>
+	<label style={theStyle}>@tiandiduwu</label>
 	</div>,
         document.getElementById('root')
       );
