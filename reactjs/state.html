@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React state</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+	<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+	<!-- react.js【React核心库】 -->
+    <!-- react-dom.js【提供与DOM相关的功能】 -->
+    <!-- babel.js【将ES6代码转为ES5代码】 -->
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+	{/*getInitialState react中初始化状态函数*/}
+	{/*其中state是可以变化的，而props则是不可变化的*/}
+      var StateButton = React.createClass({
+        getInitialState: function() {
+          return {liked: false};
+        },
+		getDefaultProps: function(){
+			return {
+				text: "这是默认属性"
+			};
+		},
+        handleClick: function(event) {
+          this.setState({liked: !this.state.liked});
+        },
+        render: function() {
+          var text = this.state.liked ? '喜欢' : '不喜欢';
+          return (
+            <p onClick={this.handleClick} style={{cursor:"pointer"}} title={this.props.title}>
+              你<b>{text}</b>我。点我切换状态。[{this.props.text}]
+            </p>
+          );
+        }
+      });
+	{/*react的组件名以大写开始，用以区分html元素*/}
+      ReactDOM.render(
+        <StateButton title="点我切换" />,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>
