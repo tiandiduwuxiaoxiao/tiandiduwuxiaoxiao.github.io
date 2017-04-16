@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React API</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+	<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+  </head>
+ <body>
+    <div id="message" align="center"></div>
+
+    <script type="text/babel">
+      var Counter = React.createClass({
+        render: function () {
+          return (
+		  <div>
+			<h3 style={{cursor:"pointer"}}>博主的邮箱地址: {this.props.email}</h3>
+			<p style={{color:"green",cursor:"pointer"}}>{this.props.desc}</p>
+		  </div>
+		  );
+        }
+      });
+      ReactDOM.render(
+        <Counter email="liuzeyunqz@163.com" desc="有事没事请邮件博主" />,
+        document.getElementById('message')
+      );
+    </script>
+  </body>
+</html>
