@@ -39,11 +39,11 @@
                 text.value = 'please type valid number';
                 return;
             }
-            var height = width;         //Õı·½ĞÎ
-            var n = height * width;     //×ÜÊı
+            var height = width;         //æ­£æ–¹å½¢
+            var n = height * width;     //æ€»æ•°
             var a = [];
 
-            for (i = 0; i < height; i++) {//¶şÎ¬Êı×é
+            for (i = 0; i < height; i++) {//äºŒç»´æ•°ç»„
                 a.push([]);
             }
 
@@ -51,7 +51,7 @@
             var column = 0;
             var up = true;
             /*
-            *Êı¾İ¹æÂÉ:Ö®×ÖĞÍ×ß·¨
+            *æ•°æ®è§„å¾‹:ä¹‹å­—å‹èµ°æ³•
             *  1  2  6  7 15 
             *  3  5  8 14 16
             *  4  9 13 17 22
@@ -59,20 +59,20 @@
             * 11 19 20 24 25
             */
             /*
-            *Ë¼Â·£º(ÕâÖ»ÊÇÒ»ÖÖ·½·¨£¬µ±È»Ò²¿ÉÒÔÑ°ÕÒÊı¾İ¹æÂÉ£¬µÃµ½¶ÔÓ¦µÄ¹«Ê½£¬±ÈÈçµÚÒ»ÅÅ+1 +4 +1 +8....)
-            *°ÑÊı×é¿´³ÉÒ»¸ö·½¿ò£¬ËÄÖÜÊÇ±ß½ç£¬µ±Êı¾İÅöµ½±ß½çÔò±ä»»·½Ïò
-            *·ÖÇé¿öÅĞ¶Ï 
-            *1.Êı¾İup×ßÏò(ÉÏ±ß½ç£¬ÓÒ±ß½ç)£¬down×ßÏò(×ó±ß½ç£¬ÏÂ±ß½ç)
-            *1.1up->row==0,ÍùÉÏ×ß»áÓöµ½row==0µÄ±ß½ç,row==0ÓÖ·ÖcolumnÊÇ²»ÊÇ==width-1,·´Ïò,
-            *2.1down->col==0,ÍùÏÂ×ß»áÓöµ½col==0µÄ±ß½ç£¬col==0ÓÖ·ÖrowÊÇ²»ÊÇ==height-1
+            *æ€è·¯ï¼š(è¿™åªæ˜¯ä¸€ç§æ–¹æ³•ï¼Œå½“ç„¶ä¹Ÿå¯ä»¥å¯»æ‰¾æ•°æ®è§„å¾‹ï¼Œå¾—åˆ°å¯¹åº”çš„å…¬å¼ï¼Œæ¯”å¦‚ç¬¬ä¸€æ’+1 +4 +1 +8....)
+            *æŠŠæ•°ç»„çœ‹æˆä¸€ä¸ªæ–¹æ¡†ï¼Œå››å‘¨æ˜¯è¾¹ç•Œï¼Œå½“æ•°æ®ç¢°åˆ°è¾¹ç•Œåˆ™å˜æ¢æ–¹å‘
+            *åˆ†æƒ…å†µåˆ¤æ–­ 
+            *1.æ•°æ®upèµ°å‘(ä¸Šè¾¹ç•Œï¼Œå³è¾¹ç•Œ)ï¼Œdownèµ°å‘(å·¦è¾¹ç•Œï¼Œä¸‹è¾¹ç•Œ)
+            *1.1up->row==0,å¾€ä¸Šèµ°ä¼šé‡åˆ°row==0çš„è¾¹ç•Œ,row==0åˆåˆ†columnæ˜¯ä¸æ˜¯==width-1,åå‘,
+            *2.1down->col==0,å¾€ä¸‹èµ°ä¼šé‡åˆ°col==0çš„è¾¹ç•Œï¼Œcol==0åˆåˆ†rowæ˜¯ä¸æ˜¯==height-1
             */
             for (var i = 1; i <= n; i++) {
                 a[row][column] = i;
                 if (up) {
-                    if (column == width - 1) {//ÓÒ±ß½ç
+                    if (column == width - 1) {//å³è¾¹ç•Œ
                         row++;
                         up = false;
-                    } else if (row == 0) {//ÉÏ±ß½ç
+                    } else if (row == 0) {//ä¸Šè¾¹ç•Œ
                         column++;
                         up = false;
                     } else {
@@ -80,10 +80,10 @@
                         row--;
                     }
                 } else {
-                    if (row == height - 1) {//ÏÂ±ß½ç
+                    if (row == height - 1) {//ä¸‹è¾¹ç•Œ
                         up = true;
                         column++;
-                    } else if (column == 0) {//×ó±ß½ç
+                    } else if (column == 0) {//å·¦è¾¹ç•Œ
                         up = true;
                         row++;
                     } else {
@@ -93,10 +93,19 @@
                 }
             }
 
-            var str = '';
+            var str = '',s='';
             for (var i = 0; i < a.length; i++) {
-                var item = a[i].toString();
-                str += str ? '\r\n' + item : item;
+				s='';
+                var item = a[i];
+				for(var j=0;j<item.length;j++){
+					var ar = item[j].toString();
+					if(ar.length<=6){
+						for(var k=0;k<6-ar.length;k++)
+							s+=' ';
+					}
+					s+=ar;
+				}
+                str += str ? '\r\n' + s : s;
             }
             text.innerHTML = str;
         }
