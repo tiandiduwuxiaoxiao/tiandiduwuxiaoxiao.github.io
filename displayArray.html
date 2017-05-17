@@ -1,0 +1,105 @@
+<html>
+<head>
+    <title>displayArray</title>
+	<link rel="shortcut icon" href="./img/pic.ico"></link>
+    <style>
+        input {
+            width: 100%;
+            height: 30px;
+            padding-left: 10px;
+            line-height: 30px;
+        }
+
+            input:focus {
+                border: 1px green solid;
+            }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input id="theInput" type="number" value="5" />
+        <button onclick="createArray()">display</button>
+        <textarea id="display"></textarea>
+    </div>
+    <script>
+        window.onload = function () {
+            createArray();
+        }
+        function createArray() {
+            var width = document.getElementById('theInput').value;
+            var text = document.getElementById('display');
+
+            if (!width || isNaN(width)) {
+                text.value = 'please type valid number';
+                return;
+            }
+            var height = width;         //正方形
+            var n = height * width;     //总数
+            var a = [];
+
+            for (i = 0; i < height; i++) {//二维数组
+                a.push([]);
+            }
+
+            var row = 0;
+            var column = 0;
+            var up = true;
+            /*
+            *数据规律:之字型走法
+            *  1  2  6  7 15 
+            *  3  5  8 14 16
+            *  4  9 13 17 22
+            * 10 12 18 21 23
+            * 11 19 20 24 25
+            */
+            /*
+            *思路：(这只是一种方法，当然也可以寻找数据规律，得到对应的公式，比如第一排+1 +4 +1 +8....)
+            *把数组看成一个方框，四周是边界，当数据碰到边界则变换方向
+            *分情况判断 
+            *1.数据up走向(上边界，右边界)，down走向(左边界，下边界)
+            *1.1up->row==0,往上走会遇到row==0的边界,row==0又分column是不是==width-1,反向,
+            *2.1down->col==0,往下走会遇到col==0的边界，col==0又分row是不是==height-1
+            */
+            for (var i = 1; i <= n; i++) {
+                a[row][column] = i;
+                if (up) {
+                    if (column == width - 1) {//右边界
+                        row++;
+                        up = false;
+                    } else if (row == 0) {//上边界
+                        column++;
+                        up = false;
+                    } else {
+                        column++;
+                        row--;
+                    }
+                } else {
+                    if (row == height - 1) {//下边界
+                        up = true;
+                        column++;
+                    } else if (column == 0) {//左边界
+                        up = true;
+                        row++;
+                    } else {
+                        column--;
+                        row++;
+                    }
+                }
+            }
+
+            var str = '';
+            for (var i = 0; i < a.length; i++) {
+                var item = a[i].toString();
+                str += str ? '\r\n' + item : item;
+            }
+            text.innerHTML = str;
+        }
+    </script>
+</body>
+</html>
