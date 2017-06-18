@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+	<title>youdao dict</title>
+	<meta charset="utf-8" />
+    <style>
+		body{
+			padding: 0;
+			margin: 0;
+			border: 0;
+		}
+		.dictInput{
+				position: fixed;
+				top:10px;
+				left:50px;
+				height: 25px;
+				width: 200px;
+				padding-left: 5px;
+				padding-right: 5px;
+				text-align: center;
+				border: 1px solid blue;
+				border-radius: 20px;
+			}
+			.dictInput:focus{
+				border-radius: 4px;
+			}
+		#result{
+			display: block;
+			position: fixed;
+			border: 0;
+			left:10px;
+			top:50px;
+			width: 300px;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<input id="dict" class="dictInput" type="text" />
+	</form>
+	<iframe id="result"></iframe>
+	<script type="text/javascript" src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			window.moveTo(0, 0);//移动窗口    
+			window.resizeTo(300, 600);//改变大小    
+			window.onresize=new Function("window.resizeTo(300,   600);")   
+			var dict = $("#dict");
+			var result = $("#result");
+			dict.keyup(function(e){
+				var target = e.srcElement || e.target;
+				if(Number(e.keyCode) === 18){
+					var transText = dict.val();
+					var youdaoApiUrl = "http://fanyi.youdao.com/openapi.do?keyfrom=pdblog&key=993123434&type=data&doctype=xml&version=1.1&q=" + transText;
+					result.prop('src',youdaoApiUrl);
+					/*$.ajax({
+						url: youdaoApiUrl,
+						data: {
+							keyfrom:'pdblog',
+							key:'993123434',
+							type: 'data',
+							doctype: 'json',
+							version: '1.1',
+							q: transText
+						},
+						type: "GET",
+						dataType: "JSONP",
+						jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+						jsonpCallback:"resultHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+						complete: function(data){
+							var e = data;
+						},
+						success: function(data){
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							resultHandler(data);
+						},
+						error: function(err){
+							var str = err.responseText;
+						}
+					});*/
+				}
+			});
+			
+			window.resultHandler = function(jsonp){
+				var translation = jsonp;
+			}
+		});
+		/*
+		http://fanyi.youdao.com/openapi.do?keyfrom=<keyfrom>&key=<key>&type=data&doctype=<doctype>&version=1.1&q=要翻译的文本
+		版本：1.1，请求方式：get，编码方式：utf-8
+		主要功能：中英互译，同时获得有道翻译结果和有道词典结果（可能没有）
+		参数说明：
+		　type - 返回结果的类型，固定为data
+		　doctype - 返回结果的数据格式，xml或json或jsonp
+		　version - 版本，当前最新版本为1.1
+		　q - 要翻译的文本，必须是UTF-8编码，字符长度不能超过200个字符，需要进行urlencode编码
+		　only - 可选参数，dict表示只获取词典数据，translate表示只获取翻译数据，默认为都获取
+		　注： 词典结果只支持中英互译，翻译结果支持英日韩法俄西到中文的翻译以及中文到英语的翻译
+		errorCode：
+		　0 - 正常
+		　20 - 要翻译的文本过长
+		　30 - 无法进行有效的翻译
+		　40 - 不支持的语言类型
+		　50 - 无效的key
+		　60 - 无词典结果，仅在获取词典结果生效
+		*/
+	</script>
+</body>
+</html>
