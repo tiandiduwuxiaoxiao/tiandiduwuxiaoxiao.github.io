@@ -5,4 +5,7 @@ second step:
   you must add a variable name "_JAVA_OPTIONs" into system variables,add set the value act as "-Xms512M -Xmx512M", this is very important.
  
 third step:
-  install "head" plugin for Elastic,i have no idea about it,await.
+  install "head" plugin for Elastic,i have no idea about it.
+  but you can do as the passage:
+    "https://segmentfault.com/q/1010000007827533/a-1020000008161682";
+  
