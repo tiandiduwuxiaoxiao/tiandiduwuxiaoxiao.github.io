@@ -1,0 +1,8 @@
+first step:
+  java environment configuration:refer to noob tutorial(菜鸟教程) about java: if the directive of "java -version" can execute in the cmd 
+after you had installed the jdk but don't config the environment variable of java,you need to add the config as the tutorial of noob;
+second step:
+  you must add a variable name "_JAVA_OPTIONs" into system variables,add set the value act as "-Xms512M -Xmx512M", this is very important.
+ 
+third step:
+  install "head" plugin for Elastic,i have no idea about it,await.
