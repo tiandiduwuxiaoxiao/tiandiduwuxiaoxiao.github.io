@@ -53,11 +53,11 @@
             margin = { left: 20, right: 20, top: 20, bottom: 20 },
             data = [4, 8, 15, 106, 23, 99];
 
-        let datas = [{ letter: 'a', frequency: 0.12 }, { letter: 'b', frequency: 0.13 }, { letter: 'c', frequency: 0.23 }, { letter: 'd', frequency: 0.45 }, { letter: 'e', frequency: 0.16 }];
+        let datas = [{ letter: 'a', frequency: 0.12 ,avg:30}, { letter: 'b', frequency: 0.13 ,avg:8}, { letter: 'c', frequency: 0.23 ,avg:15}, { letter: 'd', frequency: 0.45 ,avg:106}, { letter: 'e', frequency: 0.16 ,avg:23}];
 
-        // d3.select("body").transition()
-        //     .duration(3000)
-        //     .style("background-color", "black");
+        d3.select("body").transition()
+            .duration(3000)
+            .style("background-color", "purple");
 
         d3.select('#container')
             .append('svg')
@@ -83,7 +83,7 @@
 
         x.domain(datas.map(function (d) { return d.letter; }));
         y.domain([0, d3.max(datas, function (d) { return d.frequency; })]);
-        y0.domain([0,d3.max(datas, function (d) { return d.frequency; })]);
+        y0.domain([0,d3.max(datas, function (d) { return d.avg; })]);
 
         g.append("g")
             .attr("class", "axis axis--x")
@@ -136,13 +136,12 @@
                 return x(d.letter);
             })
             .y(function (d) {
-                return y(d.frequency);
+                return y0(d.avg);
             });
         svg.append('path')
             .data([datas])
             .attr('d', line)
             .attr('class', 'line')
-            .attr('fill','none')
             .attr('transform','translate(65,20)');
 
 
