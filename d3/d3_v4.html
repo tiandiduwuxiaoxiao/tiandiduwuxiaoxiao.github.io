@@ -1,7 +1,11 @@
+
 <html>
 <head>
     <title>d3 samples test</title>
     <style>
+        body{
+            background-color: purple;
+        }  
         #container {
             border: 1px solid green;
             margin: 0 auto;
@@ -57,7 +61,7 @@
 
         d3.select("body").transition()
             .duration(3000)
-            .style("background-color", "purple");
+            .style("background-color", "#fff");
 
         d3.select('#container')
             .append('svg')
