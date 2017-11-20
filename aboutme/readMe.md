@@ -1,1 +1,1 @@
-the folder with the documents which introduce my self
+The folder contains the documents which introduce myself
